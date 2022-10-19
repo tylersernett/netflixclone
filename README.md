@@ -1,10 +1,11 @@
 # netflixclone
 
 Optional chaining: ?. -- used to return undefined instead of throwing error when response is undefined or null.
-<img src='' alt={movie?.title} />
+`<img src='' alt={movie?.title} />`
+
 
 object-cover: maintain aspect ratio (tailwind)
-                <img className='w-full h-full object-cover' src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`} alt={movie?.title} />
+                `<img className='w-full h-full object-cover' src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`} alt={movie?.title} />`
 
 Firebase:
 1. register web app
@@ -56,4 +57,4 @@ export function UserAuth() {
     return useContext(AuthContext);
 }
 ```
-8. wrap relevant parts of App.js in <AuthContextProvider> tags
+8. wrap relevant parts of App.js in `<AuthContextProvider>` tags
