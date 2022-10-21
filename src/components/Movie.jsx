@@ -8,7 +8,6 @@ const Movie = ({ item }) => {
     const [like, setLike] = useState(false);
     const [saved, setSaved] = useState(false);
     const { user } = UserAuth();
-
     const movieID = doc(db, 'users', `${user?.email}`)
 
     const saveShow = async () => {
@@ -41,7 +40,6 @@ const Movie = ({ item }) => {
                         <FaRegHeart className='absolute top-4 left-4 text-gray-300' />
                     )}
                 </p>
-
             </div>
         </div>
     )
