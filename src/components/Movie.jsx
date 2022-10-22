@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 
 const Movie = ({ item }) => {
     const [like, setLike] = useState(false);
-    const [saved, setSaved] = useState(false);
+    //const [saved, setSaved] = useState(false);
     const { user } = UserAuth();
-    const movieID = doc(db, 'users', `${user?.email}`)
+    const userData = doc(db, 'users', `${user?.email}`)
 
     const saveShow = async () => {
         if (user?.email) { //if user logged in...
             setLike(!like);
-            setSaved(true);
-            await updateDoc(movieID, {
+            //setSaved(true);
+            await updateDoc(userData, {
                 savedShows: arrayUnion({
                     id: item.id,
                     title: item.title,
