@@ -5,6 +5,7 @@ import { UserAuth } from '../context/AuthContext'
 import { db } from '../firebase'
 import { doc, updateDoc, onSnapshot } from 'firebase/firestore'
 import { slideScroll } from '../utils/helpers'
+import Row from './Row'
 
 const SavedShows = () => {
     const [userMovies, setUserMovies] = useState([]);
@@ -17,21 +18,12 @@ const SavedShows = () => {
         })
     }, [user?.email])
 
-    const userData = doc(db, 'users', `${user?.email}`)
-    const deleteShow = async(passedID) => {
-        try {
-            const result = userMovies.filter((item)=> item.id !== passedID);
-            await updateDoc(userData, {
-                savedShows: result,
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    
 
     return (
         <>
-            <h2 className='text-white font-bold md:text-xl p-4'>My Shows</h2>
+            <Row title='Saved' fetchURL={userMovies} />
+            {/* <h2 className='text-white font-bold md:text-xl p-4'>My Shows</h2>
             <div className='relative flex items-center group'>
                 <MdChevronLeft onClick={() => slideScroll(slider, -500)} className='bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40} />
                 <div ref={slider} className='w-fill h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
@@ -48,7 +40,7 @@ const SavedShows = () => {
                     ))}
                 </div>
                 <MdChevronRight onClick={() => slideScroll(slider, 500)} className='bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40} />
-            </div>
+            </div> */}
         </>
     )
 }
