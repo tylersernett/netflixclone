@@ -2,25 +2,66 @@ import React, { useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
-import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore'
 
 const Movie = ({ item }) => {
     const [like, setLike] = useState(false);
-    //const [saved, setSaved] = useState(false);
+    const [userMovies, setUserMovies] = useState([]);
     const { user } = UserAuth();
     const userData = doc(db, 'users', `${user?.email}`)
 
+    //initialize "like"
+    useEffect(() => {
+        const getLike = async (passedID) => {
+            const userData = doc(db, 'users', `${user?.email}`)
+            const userSnap = await getDoc(userData); //all data -- use .savedShows later to just grab the array
+            try {
+                const result = userSnap.data().savedShows.filter((item) => item.id === passedID)
+                console.log(result.length);
+                if (result.length === 0) {
+                    setLike(false);
+                } else {
+                    setLike(true);
+                }
+            } catch (error) {
+                setLike(false);
+                console.log(error)
+            }
+        }
+
+        getLike(item.id);
+    }, [user?.email, item.id])
+
+
+
+    const deleteShow = async (passedID) => {
+        const userData = doc(db, 'users', `${user?.email}`)
+        const userSnap = await getDoc(userData); //all data -- use .savedShows later to just grab the array
+        try {
+            const result = userSnap.data().savedShows.filter((item) => item.id !== passedID)
+            await updateDoc(userData, {
+                savedShows: result
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const saveShow = async () => {
         if (user?.email) { //if user logged in...
-            setLike(!like);
-            //setSaved(true);
-            await updateDoc(userData, {
-                savedShows: arrayUnion({
-                    id: item.id,
-                    title: item.title,
-                    img: item.backdrop_path
+            if (!like) {
+                setLike(true);
+                await updateDoc(userData, {
+                    savedShows: arrayUnion({
+                        id: item.id,
+                        title: item.title,
+                        backdrop_path: item.backdrop_path
+                    })
                 })
-            })
+            } else {
+                setLike(false);
+                deleteShow(item.id)
+            }
         } else {
             alert('Please log in to save shows/movies')
         }
