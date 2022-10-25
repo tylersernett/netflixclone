@@ -2,18 +2,20 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import requests from '../Requests';
 
-const Main = () => {
+const Main = ({ heroMovie }) => {
     const [movies, setMovies] = useState([]);
 
-    //pick a random movie
-    const movie = movies[Math.floor(Math.random() * movies.length)]
+    let movie = heroMovie;
+    if (heroMovie === null) { 
+        //randomize if no heroMovie set
+        movie = movies[Math.floor(Math.random() * movies.length)]
+    }
 
     useEffect(() => {
         axios.get(requests.requestPopular).then((response) => {
             setMovies(response.data.results);
         })
     }, [])
-    // console.log(movie);
 
     const truncateString = (str, num) => {
         if (str?.length > num) {

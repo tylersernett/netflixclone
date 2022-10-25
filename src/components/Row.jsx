@@ -4,10 +4,11 @@ import Movie from './Movie';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { slideScroll } from '../utils/helpers';
 
-const Row = ({ title, fetchURL }) => {
+const Row = ({ setHeroMovie, title, fetchURL }) => {
     const [movies, setMovies] = useState([]);
     const slider = useRef();
 
+    //initialize movies. passed in var will either be a string URL, or an array
     useEffect(() => {
         if (typeof fetchURL === 'string') {
             axios.get(fetchURL).then((response) => {
@@ -25,7 +26,7 @@ const Row = ({ title, fetchURL }) => {
                 <MdChevronLeft onClick={() => slideScroll(slider, -500)} className='bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40} />
                 <div ref={slider} className='w-fill h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
                     {movies.map((item, id) => (
-                        <Movie item={item} key={id} />
+                        <Movie setHeroMovie={setHeroMovie} item={item} key={id} />
                     ))}
 
                 </div>
