@@ -9,11 +9,11 @@ const Home = () => {
   return (
     <>
       <Main heroMovie={heroMovie}/>
-      <Row setHeroMovie={setHeroMovie} title='Upcoming' fetchURL={requests.requestUpcoming} />
-      <Row setHeroMovie={setHeroMovie} title='Popular' fetchURL={requests.requestPopular} />
-      <Row setHeroMovie={setHeroMovie} title='Upcoming' fetchURL={requests.requestTrending} />
-      <Row setHeroMovie={setHeroMovie} title='Top Rated' fetchURL={requests.requestTopRated} />
-      <Row setHeroMovie={setHeroMovie} title='Horror' fetchURL={requests.requestHorror} />
+      <Row setHeroMovie={setHeroMovie} title='Upcoming' movieArrayData={requests.requestUpcoming} />
+      <Row setHeroMovie={setHeroMovie} title='Popular' movieArrayData={requests.requestPopular} />
+      <Row setHeroMovie={setHeroMovie} title='Upcoming' movieArrayData={requests.requestTrending} />
+      <Row setHeroMovie={setHeroMovie} title='Top Rated' movieArrayData={requests.requestTopRated} />
+      <Row setHeroMovie={setHeroMovie} title='Horror' movieArrayData={requests.requestHorror} />
     </>
   )
 }

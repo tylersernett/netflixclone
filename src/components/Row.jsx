@@ -4,20 +4,20 @@ import Movie from './Movie';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { slideScroll } from '../utils/helpers';
 
-const Row = ({ setHeroMovie, title, fetchURL }) => {
+const Row = ({ setHeroMovie, title, movieArrayData }) => {
     const [movies, setMovies] = useState([]);
     const slider = useRef();
 
-    //initialize movies. passed in var will either be a string URL, or an array
+    //initialize movies. passed in var will either be a string URL to fetch from, or an array
     useEffect(() => {
-        if (typeof fetchURL === 'string') {
-            axios.get(fetchURL).then((response) => {
+        if (typeof movieArrayData === 'string') {
+            axios.get(movieArrayData).then((response) => {
                 setMovies(response.data.results)
             })
         } else {
-            setMovies(fetchURL)
+            setMovies(movieArrayData)
         }
-    }, [fetchURL])
+    }, [movieArrayData])
 
     return (
         <>
