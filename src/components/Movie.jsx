@@ -52,7 +52,9 @@ const Movie = ({ setHeroMovie, item }) => {
                     savedShows: arrayUnion({
                         id: item.id,
                         title: item.title,
-                        backdrop_path: item.backdrop_path
+                        backdrop_path: item.backdrop_path,
+                        release_date: item.release_date,
+                        overview: item.overview
                     })
                 })
             } else {

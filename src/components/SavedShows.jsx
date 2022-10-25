@@ -7,7 +7,7 @@ import { doc, updateDoc, onSnapshot } from 'firebase/firestore'
 import { slideScroll } from '../utils/helpers'
 import Row from './Row'
 
-const SavedShows = () => {
+const SavedShows = ({setHeroMovie}) => {
     const [userMovies, setUserMovies] = useState([]);
     const { user } = UserAuth();
     const slider = useRef();
@@ -16,13 +16,11 @@ const SavedShows = () => {
         onSnapshot(doc(db, 'users', `${user?.email}`), (doc)=>{
             setUserMovies(doc.data()?.savedShows)
         })
-    }, [user?.email])
-
-    
+    }, [user?.email])  
 
     return (
         <>
-            <Row title='Saved' movieArrayData={userMovies} />
+            <Row setHeroMovie={setHeroMovie} title='Saved' movieArrayData={userMovies} />
             {/* <h2 className='text-white font-bold md:text-xl p-4'>My Shows</h2>
             <div className='relative flex items-center group'>
                 <MdChevronLeft onClick={() => slideScroll(slider, -500)} className='bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40} />
@@ -46,5 +44,3 @@ const SavedShows = () => {
 }
 
 export default SavedShows
-//todo: make more DRY. re-use 'like' mechanic on this page. 
-//and have 'unlike' be equivalent to deleting from db.
