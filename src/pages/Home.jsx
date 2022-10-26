@@ -3,12 +3,12 @@ import Main from '../components/Main'
 import Row from '../components/Row'
 import requests from '../Requests'
 
-const Home = ({heroMovie, setHeroMovie}) => {
-  
+const Home = () => {
+  const [heroMovie, setHeroMovie] = useState(null);
 
   return (
     <>
-      <Main heroMovie={heroMovie}/>
+      <Main heroMovie={heroMovie} />
       <Row setHeroMovie={setHeroMovie} title='Upcoming' movieArrayData={requests.requestUpcoming} />
       <Row setHeroMovie={setHeroMovie} title='Popular' movieArrayData={requests.requestPopular} />
       <Row setHeroMovie={setHeroMovie} title='Upcoming' movieArrayData={requests.requestTrending} />

@@ -9,16 +9,15 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useState } from "react";
 
 function App() {
-  const [heroMovie, setHeroMovie] = useState(null);
   return (
     <>
       <AuthContextProvider>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home heroMovie={heroMovie} setHeroMovie={setHeroMovie}/>} />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/account' element={<ProtectedRoute><Account heroMovie={heroMovie} setHeroMovie={setHeroMovie}/></ProtectedRoute>} />
+          <Route path='/account' element={<ProtectedRoute><Account /></ProtectedRoute>} />
         </Routes>
       </AuthContextProvider>
     </>
