@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Main from '../components/Main';
 import SavedShows from '../components/SavedShows'
 
 const Account = () => {
-  //make new heroMovie var here? I don't think it needs to be passed in...
-  //useEffect -- init hero to null
   const [heroMovie, setHeroMovie] = useState(null);
-  // useEffect(() => {
-  //   setHeroMovie(null);
-  // }, [setHeroMovie])
-  
 
   return (
     <>
