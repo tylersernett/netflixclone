@@ -60,5 +60,7 @@ export function UserAuth() {
 8. wrap relevant parts of App.js in `<AuthContextProvider>` tags
 
 Problem: How to update the 'hero movie' at the top?
-Solution: pass the setHeroMovie function two components deep:
+Initial Solution: pass the setHeroMovie function two components deep:
 init [heroMovie, setHeroMovie] in Home. Then pass setHeroMovie to each Row. Then have each Row pass the function to each Movie.
+New Problem: Sloppy to pass to child, then from child to grandchild.
+New solution: Incorporate useContext to the 'deep' children can more easily access state
