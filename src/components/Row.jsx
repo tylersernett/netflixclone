@@ -11,11 +11,16 @@ const Row = ({ setHeroMovie, title, movieArrayData }) => {
     //initialize movies. passed in var will either be a string URL to fetch from, or an array
     useEffect(() => {
         if (typeof movieArrayData === 'string') {
-            axios.get(movieArrayData).then((response) => {
+            const controller = new AbortController();
+            axios.get(movieArrayData, {signal: controller.signal})
+            .then((response) => {
                 setMovies(response.data.results)
             })
+            return () => {
+                controller.abort()
+            }
         } else {
-            setMovies(movieArrayData)
+            setMovies(movieArrayData);
         }
     }, [movieArrayData])
 
