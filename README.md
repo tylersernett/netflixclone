@@ -109,3 +109,21 @@ const handleSubmit = async (e) => {
     <input ref={emailRef} className='p-3 my-2 bg-gray-700 rounded' type='email' placeholder='Email' autoComplete='email' />
     <input ref={passwordRef} className='p-3 my-2 bg-gray-700 rounded' type='password' placeholder='Password' autoComplete='current-password' />
 ```
+
+Best practice: abort fetch requests
+```javascript
+useEffect(() => {
+        if (typeof movieArrayData === 'string') {
+            const controller = new AbortController();
+            axios.get(movieArrayData, {signal: controller.signal})
+            .then((response) => {
+                setMovies(response.data.results)
+            })
+            return () => {
+                controller.abort()
+            }
+        } else {
+            setMovies(movieArrayData);
+        }
+    }, [movieArrayData])
+```
