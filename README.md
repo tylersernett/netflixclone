@@ -64,3 +64,48 @@ Initial Solution: pass the setHeroMovie function two components deep:
 init [heroMovie, setHeroMovie] in Home. Then pass setHeroMovie to each Row. Then have each Row pass the function to each Movie.
 New Problem: Sloppy to pass to child, then from child to grandchild.
 New solution: Incorporate useContext to the 'deep' children can more easily access state
+
+
+Ref Vs State
+Re-render during every key press:
+
+```javascript
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await logIn(email, password);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
+
+  ...
+  ...
+    <input onChange={(e) => setEmail(e.target.value)} className='p-3 my-2 bg-gray-700 rounded' type='email' placeholder='Email' autoComplete='email' />
+    <input onChange={(e) => setPassword(e.target.value)} className='p-3 my-2 bg-gray-700 rounded' type='password' placeholder='Password' autoComplete='current-password' />
+  ```
+
+  Only render the new submitted value:
+  ```javascript
+    const emailRef = useRef();
+  const passwordRef = useRef();
+
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await logIn(emailRef.current.value, passwordRef.current.value);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
+...
+    <input ref={emailRef} className='p-3 my-2 bg-gray-700 rounded' type='email' placeholder='Email' autoComplete='email' />
+    <input ref={passwordRef} className='p-3 my-2 bg-gray-700 rounded' type='password' placeholder='Password' autoComplete='current-password' />
+```
