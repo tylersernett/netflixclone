@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-import { UserAuth } from '../context/AuthContext';
-import { db } from '../firebase';
+import { UserAuth } from '../context/AuthContext'
+import { db } from '../firebase'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 
 const Movie = ({ setHeroMovie, item }) => {
     const [like, setLike] = useState(false);
     const { user } = UserAuth(); //?? maybe unneccessary for every Movie component?
-    const userData = doc(db, 'users', `${user?.email}`) //?? maybe unneccessary for every Movie component?
+    const userData = doc(db, 'users', `${user?.email}`); //?? maybe unneccessary for every Movie component?
 
     //initialize "like"
     useEffect(() => {
         const getLike = async (passedID) => {
-            const userData = doc(db, 'users', `${user?.email}`)
+            const userData = doc(db, 'users', `${user?.email}`);
             const userSnap = await getDoc(userData); //all data -- use .savedShows later to just grab the array
             try {
-                const result = userSnap.data().savedShows.filter((item) => item.id === passedID)
+                const result = userSnap.data().savedShows.filter((item) => item.id === passedID);
                 if (result.length === 0) {
                     setLike(false);
                 } else {
@@ -23,7 +23,7 @@ const Movie = ({ setHeroMovie, item }) => {
                 }
             } catch (error) {
                 setLike(false);
-                console.log(error)
+                console.log(error);
             }
         }
 
@@ -43,7 +43,7 @@ const Movie = ({ setHeroMovie, item }) => {
         }
     }
 
-    const saveShow = async () => {
+    const toggleSave = async () => {
         if (user?.email) { //if user logged in...
             if (!like) {
                 setLike(true);
@@ -55,13 +55,13 @@ const Movie = ({ setHeroMovie, item }) => {
                         release_date: item.release_date,
                         overview: item.overview
                     })
-                })
+                });
             } else {
                 setLike(false);
-                deleteShow(item.id)
+                deleteShow(item.id);
             }
         } else {
-            alert('Please log in to save shows/movies')
+            alert('Please log in to save shows/movies');
         }
     }
 
@@ -71,13 +71,13 @@ const Movie = ({ setHeroMovie, item }) => {
     }
 
     return (
-        <div className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor:pointer relative p-2'>
+        <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block cursor:pointer relative p-2'>
             <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
             <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
                 <p onClick={updateHeroMovie } className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center cursor-pointer'>
                     {item?.title}
                 </p>
-                <p onClick={saveShow}>
+                <p onClick={toggleSave}>
                     {like ? (
                         <FaHeart className='absolute top-4 left-4 text-gray-300' />
                     ) : (
