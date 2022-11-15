@@ -19,7 +19,7 @@ const Account = () => {
         </div>
       </div>
       ) : (
-        <Main heroMovie={heroMovie}/>
+        <Main heroMovie={heroMovie} setHeroMovie={setHeroMovie}/>
       ) }
       <SavedShows setHeroMovie={setHeroMovie}/>
     </>

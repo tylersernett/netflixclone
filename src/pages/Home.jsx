@@ -8,10 +8,10 @@ const Home = () => {
 
   return (
     <>
-      <Main heroMovie={heroMovie} />
+      <Main heroMovie={heroMovie} setHeroMovie={setHeroMovie} />
       <Row setHeroMovie={setHeroMovie} title='Upcoming' movieArrayData={requests.requestUpcoming} />
       <Row setHeroMovie={setHeroMovie} title='Popular' movieArrayData={requests.requestPopular} />
-      <Row setHeroMovie={setHeroMovie} title='Upcoming' movieArrayData={requests.requestTrending} />
+      <Row setHeroMovie={setHeroMovie} title='Trending' movieArrayData={requests.requestTrending} />
       <Row setHeroMovie={setHeroMovie} title='Top Rated' movieArrayData={requests.requestTopRated} />
       <Row setHeroMovie={setHeroMovie} title='Horror' movieArrayData={requests.requestHorror} />
     </>
