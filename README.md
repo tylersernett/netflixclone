@@ -127,3 +127,32 @@ useEffect(() => {
         }
     }, [movieArrayData])
 ```
+
+UseMemo: avoid referential equality re-renders 
+(isolate certain vars from re-rendering when others do)
+
+useContext: avoid prop drilling. Pass context vars to children.
+```Javascript
+//Home.jsx -- pass context to children
+export const HeroContext = createContext(null); //establish context w/ default value null
+const Home = () => {
+  const [heroMovie, setHeroMovie] = useState(null);
+
+  return (
+    <>
+      <HeroContext.Provider value={{heroMovie, setHeroMovie}}>
+        <Main/>
+        <Row title='Upcoming' movieArrayData={requests.requestUpcoming} />
+      </HeroContext.Provider>
+    </>
+  )
+}
+
+/////////////////////////////////////
+//Movie.jsx -- access this context from child:
+import { HeroContext } from '../pages/Home'
+
+const Movie = ({ item }) => {
+    const [like, setLike] = useState(false);
+    const { setHeroMovie } = useContext(HeroContext);
+```
