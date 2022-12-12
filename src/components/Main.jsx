@@ -1,15 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import requests from '../Requests';
 import { FaPlay } from 'react-icons/fa'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { UserAuth } from '../context/AuthContext';
+import { HeroContext } from '../pages/Home';
 import { db } from '../firebase';
 
-const Main = ({ heroMovie, setHeroMovie }) => {
+const Main = () => {
     const [movies, setMovies] = useState([]);
     const [like, setLike] = useState(false);
     const { user } = UserAuth();
+    const {heroMovie} = useContext(HeroContext);
+    const {setHeroMovie} = useContext(HeroContext);
 
     // let heroMovie = heroMovie;
     // if (heroMovie === null) {
