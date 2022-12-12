@@ -4,7 +4,7 @@ import Movie from './Movie';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { slideScroll } from '../utils/helpers';
 
-const Row = ({ setHeroMovie, title, movieArrayData }) => {
+const Row = ({ title, movieArrayData }) => {
     const [movies, setMovies] = useState([]);
     const slider = useRef();
 
@@ -12,10 +12,10 @@ const Row = ({ setHeroMovie, title, movieArrayData }) => {
     useEffect(() => {
         if (typeof movieArrayData === 'string') {
             const controller = new AbortController();
-            axios.get(movieArrayData, {signal: controller.signal})
-            .then((response) => {
-                setMovies(response.data.results)
-            })
+            axios.get(movieArrayData, { signal: controller.signal })
+                .then((response) => {
+                    setMovies(response.data.results)
+                })
             return () => {
                 controller.abort()
             }
@@ -31,7 +31,7 @@ const Row = ({ setHeroMovie, title, movieArrayData }) => {
                 <MdChevronLeft onClick={() => slideScroll(slider, -500)} className='bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40} />
                 <div ref={slider} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
                     {movies.map((item, id) => (
-                        <Movie setHeroMovie={setHeroMovie} item={item} key={id} />
+                        <Movie item={item} key={id} />
                     ))}
 
                 </div>
