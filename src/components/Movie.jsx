@@ -3,7 +3,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { UserAuth } from '../context/AuthContext'
 import { db } from '../firebase'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
-import { HeroContext } from '../pages/Home'
+import { HeroContext } from '../App'
 
 const Movie = ({ item }) => {
     const [like, setLike] = useState(false);

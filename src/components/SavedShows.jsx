@@ -5,7 +5,7 @@ import { doc, getDoc, onSnapshot } from 'firebase/firestore'
 import Row from './Row'
 import Movie from './Movie'
 
-const SavedShows = ({ setHeroMovie }) => {
+const SavedShows = () => {
     const [userMovies, setUserMovies] = useState([]);
     const { user } = UserAuth();
 
@@ -24,7 +24,7 @@ const SavedShows = ({ setHeroMovie }) => {
 
     }, [user?.email])
 
-    //delayed refresh of deleted items: (use can't re-like an unliked item after X seconds)
+    //delayed refresh of deleted items: (user can't re-like an unliked item after X seconds)
     //but: re-liked item moves to end of queue
     // useEffect(() => {
     //     onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
@@ -36,7 +36,7 @@ const SavedShows = ({ setHeroMovie }) => {
     //     })
     // }, [user?.email])
 
-    //instant refresh of deleted items: (use can't re-like an unliked item)
+    //instant refresh of deleted items: (user can't re-like an unliked item)
     // useEffect(() => {
     //     onSnapshot(doc(db, 'users', `${user?.email}`), (doc)=>{
     //         setUserMovies(doc.data()?.savedShows)
@@ -46,9 +46,9 @@ const SavedShows = ({ setHeroMovie }) => {
     return (
         <>
             <div className='flex justify-center '>
-                <div className='grid grid-cols-3 gap-2 overflow-x-scroll scrollbar-overflow-x scrollbar-hide  md:grid-cols-4 xl:grid-cols-5'>
+                <div className='grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2 overflow-x-scroll scrollbar-overflow-x scrollbar-hide'>
                     {userMovies.map((item, id) => (
-                        <Movie setHeroMovie={setHeroMovie} item={item} key={id} />
+                        <Movie item={item} key={id} />
                     ))}
 
                 </div>

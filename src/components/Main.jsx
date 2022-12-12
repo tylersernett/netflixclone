@@ -4,15 +4,14 @@ import requests from '../Requests';
 import { FaPlay } from 'react-icons/fa'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { UserAuth } from '../context/AuthContext';
-import { HeroContext } from '../pages/Home';
+import { HeroContext } from '../App';
 import { db } from '../firebase';
 
 const Main = () => {
     const [movies, setMovies] = useState([]);
     const [like, setLike] = useState(false);
     const { user } = UserAuth();
-    const {heroMovie} = useContext(HeroContext);
-    const {setHeroMovie} = useContext(HeroContext);
+    const { heroMovie, setHeroMovie } = useContext(HeroContext);
 
     // let heroMovie = heroMovie;
     // if (heroMovie === null) {
@@ -32,7 +31,6 @@ const Main = () => {
             setHeroMovie(movies[Math.floor(Math.random() * movies.length)])
         }
     }, [heroMovie, movies, setHeroMovie])
-
 
     const truncateString = (str, num) => {
         if (str?.length > num) {
