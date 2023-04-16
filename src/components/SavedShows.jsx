@@ -45,6 +45,7 @@ const SavedShows = () => {
 
     return (
         <>
+            <h2 className='text-white font-bold md:text-xl p-4'>Saved Content</h2>
             <div className='flex justify-center '>
                 <div className='grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2 overflow-x-scroll scrollbar-overflow-x scrollbar-hide'>
                     {userMovies.map((item, id) => (
