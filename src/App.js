@@ -18,7 +18,6 @@ function App() {
     <>
       <AuthContextProvider>
       <HeroContext.Provider value={{heroMovie, setHeroMovie}}>
-
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
@@ -28,7 +27,6 @@ function App() {
         </Routes>
         <Footer />
         </HeroContext.Provider>
-
       </AuthContextProvider>
     </>
   );
