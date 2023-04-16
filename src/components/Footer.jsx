@@ -16,7 +16,7 @@ const footerPages = [
     { text: "Contact Us", link: "/" },
     { text: "Speed Test", link: "/" },
     { text: "Legal Notices", link: "/" },
-    { text: "Only on Netflix", link: "/" },
+    { text: "Only on Notflicks", link: "/" },
     { text: "Do Not Sell or Share My Personal Information", link: "/" },
 ]
 
@@ -25,7 +25,7 @@ function Footer() {
         <>
             <div className="mt-16 h-2 bg-gray-800"></div>
             <div className="mt-8 p-10 text-gray-500 w-[90%] mx-auto">
-                <div className="mb-8">Questions? Call 1-844-505-2993</div>
+                <div className="mb-8">Questions? Call 1-844-XXX-XXXX</div>
                 <div className="grid justify-around grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-3 gap-x-2 text-sm">
                     {footerPages.map((page) => (
                         <div key={page.text}><a className="hover:underline" href={page.link}>{page.text}</a></div>

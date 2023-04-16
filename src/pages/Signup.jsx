@@ -40,7 +40,7 @@ const Signup = () => {
                   <p><input className='mr-1' type='checkbox' />Remember Me</p>
                   <p>Need Help?</p>
                 </div>
-                <p className='py-8'><span className='text-gray-500'>Already subscribed to Netflix? &nbsp;</span>
+                <p className='py-8'><span className='text-gray-500'>Already subscribed to Notflicks? &nbsp;</span>
                   <Link to='/login'>
                     Sign In
                   </Link>
