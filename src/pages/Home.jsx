@@ -12,6 +12,7 @@ const Home = () => {
         <Row title='Popular' movieArrayData={requests.requestPopular} />
         <Row title='Trending' movieArrayData={requests.requestTrending} />
         <Row title='Top Rated' movieArrayData={requests.requestTopRated} />
+        <Row title='Animation' movieArrayData={requests.requestAnimation} />
         <Row title='Horror' movieArrayData={requests.requestHorror} />
     </>
   )
