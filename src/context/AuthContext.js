@@ -19,6 +19,10 @@ export function AuthContextProvider({ children }) {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    function guestLogIn() {
+        return signInWithEmailAndPassword(auth, 'test@test.com', 'password');
+    }
+
     function logOut() {
         return signOut(auth);
     }
@@ -33,7 +37,7 @@ export function AuthContextProvider({ children }) {
     });
 
     return (
-        <AuthContext.Provider value={{ signUp, logIn, logOut, user }}>
+        <AuthContext.Provider value={{ signUp, logIn, logOut, guestLogIn, user }}>
             {children}
         </AuthContext.Provider>
     )

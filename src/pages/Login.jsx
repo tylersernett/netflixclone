@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
+import GuestButton from '../components/GuestButton';
 
 const Login = () => {
   const emailRef = useRef(); //state not needed here--no need to update state on every character entry, only the final submitted value matters
@@ -8,7 +9,7 @@ const Login = () => {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {user, logIn} = UserAuth();
+  const { user, logIn, guestLogIn, setUser } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,7 +22,19 @@ const Login = () => {
       setError(error.message);
     }
   };
-  
+
+  const handleGuestLogin = async (e) => {
+    e.preventDefault();
+    guestLogIn()
+      .then((userCredential) => {
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error('Error signing in anonymously:', error);
+      });
+    navigate('/');
+  }
+
   return (
     <>
       <div className='w-full h-screen'>
@@ -49,6 +62,10 @@ const Login = () => {
                   </Link>
                   <span className='text-gray-500'>.</span>
                 </p>
+              </form>
+              {/* <GuestButton/> */}
+              <form onSubmit={handleGuestLogin}>
+                <button className='bg-orange-500 w-full py-3 my-6 rounded font-bold' >Guest Login</button>
               </form>
             </div>
           </div>
