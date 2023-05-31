@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import requests from '../Requests';
 import { FaPlay } from 'react-icons/fa'
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { UserAuth } from '../context/AuthContext';
 import { HeroContext } from '../App';
 import { db } from '../firebase';
@@ -12,12 +12,6 @@ const Main = () => {
     const [like, setLike] = useState(false);
     const { user } = UserAuth();
     const { heroMovie, setHeroMovie } = useContext(HeroContext);
-
-    // let heroMovie = heroMovie;
-    // if (heroMovie === null) {
-    //     //randomize if no heroMovie set
-    //     setHeroMovie( movies[Math.floor(Math.random() * movies.length)] )
-    // }
 
     useEffect(() => {
         axios.get(requests.requestPopular).then((response) => {
@@ -38,41 +32,6 @@ const Main = () => {
         }
         return str;
     }
-
-    //000
-    //initialize "like"
-    // useEffect(() => {
-    //     const getLike = async (passedID) => {
-    //         const userData = doc(db, 'users', `${user?.email}`)
-    //         const userSnap = await getDoc(userData); //all data -- use .savedShows later to just grab the array
-    //         try {
-    //             const result = userSnap.data().savedShows.filter((item) => item.id === passedID)
-    //             if (result.length === 0) {
-    //                 setLike(false);
-    //             } else {
-    //                 setLike(true);
-    //             }
-    //         } catch (error) {
-    //             setLike(false);
-    //             console.log(error)
-    //         }
-    //     }
-
-    //     getLike(movie.id);
-    // }, [user?.email, movie.id])
-
-    // const deleteShow = async (passedID) => {
-    //     const userData = doc(db, 'users', `${user?.email}`)
-    //     const userSnap = await getDoc(userData); //all data -- use .savedShows later to just grab the array
-    //     try {
-    //         const result = userSnap.data().savedShows.filter((item) => item.id !== passedID)
-    //         await updateDoc(userData, {
-    //             savedShows: result
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
 
     const saveShow = async () => {
         if (user?.uid) { //if user logged in...
@@ -96,7 +55,6 @@ const Main = () => {
             alert('Please log in to save shows/movies')
         }
     }
-    //000
     // example image URL: https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
 
     return (
