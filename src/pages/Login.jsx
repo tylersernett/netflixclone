@@ -7,7 +7,7 @@ const Login = () => {
   const emailRef = useRef(); //state not needed here--no need to update state on every character entry, only the final submitted value matters
   const passwordRef = useRef();
   const [error, setError] = useState('');
-  const { logIn, guestLogIn } = UserAuth();
+  const { logIn } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,16 +20,6 @@ const Login = () => {
       setError(error.message);
     }
   };
-
-  const handleGuestLogin = async () => {
-    try {
-      await guestLogIn();
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-      setError(error.message);
-    }
-  }
 
   return (
     <div className='w-full h-screen'>
@@ -58,8 +48,7 @@ const Login = () => {
                 <span className='text-gray-500'>.</span>
               </p>
             </form>
-            {/* <GuestButton/> */}
-            <button onClick={handleGuestLogin} className='bg-orange-500 w-full py-3 my-6 rounded font-bold' >Guest Login</button>
+            <GuestButton/>
           </div>
         </div>
       </div>
