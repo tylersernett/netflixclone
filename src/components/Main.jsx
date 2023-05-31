@@ -75,7 +75,7 @@ const Main = () => {
     // }
 
     const saveShow = async () => {
-        if (user?.email) { //if user logged in...
+        if (user?.uid) { //if user logged in...
             if (!like) {
                 setLike(true);
                 const userData = doc(db, 'users', `${user?.email}`)
