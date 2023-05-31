@@ -46,7 +46,7 @@ const Movie = ({ item }) => {
     }
 
     const toggleSave = async () => {
-        if (user?.email) { //if user logged in...
+        if (user?.uid) { //if user logged in...
             if (!like) {
                 setLike(true);
                 await updateDoc(userData, {

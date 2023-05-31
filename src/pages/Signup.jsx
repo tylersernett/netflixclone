@@ -1,11 +1,12 @@
 import React, { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext';
+import GuestButton from '../components/GuestButton';
 
 const Signup = () => {
   const emailRef = useRef(); //useRef instead of useState: no re-render on every character input; just the final value
   const passwordRef = useRef();
-  const { user, signUp } = UserAuth();
+  const { signUp } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -46,6 +47,7 @@ const Signup = () => {
                   </Link>
                 </p>
               </form>
+              <GuestButton/>
             </div>
           </div>
         </div>
