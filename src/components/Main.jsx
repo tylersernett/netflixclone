@@ -7,6 +7,13 @@ import { UserAuth } from '../context/AuthContext';
 import { HeroContext } from '../App';
 import { db } from '../firebase';
 
+const truncateString = (str, num) => {
+    if (str?.length > num) {
+        return str.slice(0, num) + '...';
+    }
+    return str;
+}
+
 const Main = () => {
     const [movies, setMovies] = useState([]);
     const [like, setLike] = useState(false);
@@ -25,13 +32,6 @@ const Main = () => {
             setHeroMovie(movies[Math.floor(Math.random() * movies.length)])
         }
     }, [heroMovie, movies, setHeroMovie])
-
-    const truncateString = (str, num) => {
-        if (str?.length > num) {
-            return str.slice(0, num) + '...';
-        }
-        return str;
-    }
 
     const saveShow = async () => {
         if (user?.uid) { //if user logged in...
