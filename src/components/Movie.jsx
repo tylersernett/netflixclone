@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { UserAuth } from '../context/AuthContext'
 import { db } from '../firebase'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { HeroContext } from '../App'
+import Tooltip from 'react-bootstrap/Tooltip'
 
 const Movie = ({ item }) => {
     const [like, setLike] = useState(false);
@@ -32,7 +33,7 @@ const Movie = ({ item }) => {
         getLike(item.id);
     }, [user?.email, item.id])
 
-    const deleteShow = async (passedID) => {
+    const deleteShow = useCallback(async (passedID) => {
         const userData = doc(db, 'users', `${user?.email}`)
         const userSnap = await getDoc(userData); //all data -- use .savedShows later to just grab the array
         try {
@@ -43,10 +44,10 @@ const Movie = ({ item }) => {
         } catch (error) {
             console.log(error)
         }
-    }
+    }, [user?.email]);
 
-    const toggleSave = async () => {
-        if (user?.uid) { //if user logged in...
+    const toggleSave = useCallback(async () => {
+        if (user?.uid) {
             if (!like) {
                 setLike(true);
                 await updateDoc(userData, {
@@ -64,8 +65,9 @@ const Movie = ({ item }) => {
             }
         } else {
             alert('Please log in to save shows/movies');
+            // setError(true);
         }
-    }
+    }, [user?.uid, like, userData, item, deleteShow])
 
     const updateHeroMovie = () => {
         setHeroMovie(item);
