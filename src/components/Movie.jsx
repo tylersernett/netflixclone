@@ -47,7 +47,7 @@ const Movie = ({ item }) => {
     }, [user?.email]);
 
     const toggleSave = useCallback(async () => {
-        if (user?.uid) {
+        if (user?.email) {
             if (!like) {
                 setLike(true);
                 await updateDoc(userData, {
@@ -67,7 +67,7 @@ const Movie = ({ item }) => {
             alert('Please log in to save shows/movies');
             // setError(true);
         }
-    }, [user?.uid, like, userData, item, deleteShow])
+    }, [user?.email, like, userData, item, deleteShow])
 
     const updateHeroMovie = () => {
         setHeroMovie(item);

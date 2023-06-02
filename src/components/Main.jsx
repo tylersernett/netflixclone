@@ -6,6 +6,7 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { UserAuth } from '../context/AuthContext';
 import { HeroContext } from '../App';
 import { db } from '../firebase';
+import Tooltip from 'react-bootstrap/Tooltip'
 
 const truncateString = (str, num) => {
     if (str?.length > num) {
@@ -34,7 +35,7 @@ const Main = () => {
     }, [heroMovie, movies, setHeroMovie])
 
     const saveShow = async () => {
-        if (user?.uid) { //if user logged in...
+        if (user?.email) { //if user logged in...
             if (!like) {
                 setLike(true);
                 const userData = doc(db, 'users', `${user?.email}`)

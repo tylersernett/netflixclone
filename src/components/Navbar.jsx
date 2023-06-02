@@ -23,7 +23,7 @@ const Navbar = () => {
       <Link to='/'>
         <h1 className='text-red-600 text-4xl font-bold cursor-pointer'>NOTFLICKS</h1>
       </Link>
-      {user?.uid ? (
+      {user?.email ? (
         <div>
           <Link to='/account'>
             <button className='text-white pr-4'>Account</button>
