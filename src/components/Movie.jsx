@@ -72,28 +72,40 @@ const Movie = ({ item }) => {
     }
 
     const handleTooltipShow = () => {
-            setShowTooltip(true);
+        setShowTooltip(true);
     };
 
     const handleTooltipHide = () => {
-        setShowTooltip(false);
+        setTimeout(() => {
+            setShowTooltip(false);
+        }, 100);
     };
 
     return (
         <>
-            <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block cursor:pointer relative p-2'>
-                {(showTooltip && !user) && <div id="login-tooltip" className='z-10 text-white bg-red-600 absolute left-10 -translate-y-2 rounded px-2 py-1 pointer-events-none transition-opacity ease-in duration-300 opacity-100 hover:opacity-0 ' >
-                    Please Login To Save Media
-                </div> }
+            <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block relative p-2'>
+                    <div
+                        id="login-tooltip"
+                        style={{
+                            opacity: showTooltip ? 1 : 0,
+                            transition: 'opacity 0.2s ease-in',
+                        }}
+                        className="z-10 text-white bg-red-600 absolute left-10 -translate-y-2 rounded px-2 py-1 pointer-events-none"
+                    >
+                        Please Login to Save Media
+                    </div>
+                {/* )} */}
+
                 <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
                 <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 transition-opacity ease-in duration-150 opacity-0 hover:opacity-100 text-white'>
-                    <p onClick={updateHeroMovie} className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center cursor-pointer px-3'>
-                        {item?.title}
+                    <p onClick={updateHeroMovie} className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>
+                        <span className='p-3 cursor-pointer'>{item?.title}</span>
                     </p>
                     <div
                         onClick={toggleSave}
                         onMouseEnter={handleTooltipShow}
                         onMouseLeave={handleTooltipHide}
+                        className={user? 'cursor-pointer' : '' }
                     >
 
                         {like ? (
