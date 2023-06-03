@@ -36,12 +36,12 @@ const Signup = () => {
                   className='p-3 my-2 bg-gray-700 rounded' type='email' placeholder='Email' autoComplete='email' />
                 <input ref={passwordRef}
                   className='p-3 my-2 bg-gray-700 rounded' type='password' placeholder='Password' autoComplete='current-password' />
-                <button className='bg-red-600 py-3 my-6 rounded font-bold'>Sign Up</button>
-                <div className='flex justify-between items-center text-sm text-gray-500'>
+                <button className='bg-red-600 hover:bg-red-700 py-3 my-6 rounded font-bold'>Sign Up</button>
+                <div className='flex justify-between items-center text-sm text-gray-400'>
                   <p><input className='mr-1' type='checkbox' />Remember Me</p>
                   <p>Need Help?</p>
                 </div>
-                <p className='py-8'><span className='text-gray-500'>Already subscribed to Notflicks? &nbsp;</span>
+                <p className='py-8'><span className='text-gray-400'>Already subscribed to Notflicks? &nbsp;</span>
                   <Link to='/login'>
                     Sign In
                   </Link>

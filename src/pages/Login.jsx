@@ -36,16 +36,16 @@ const Login = () => {
             <form onSubmit={handleSubmit} className='w-full flex flex-col py-4'>
               <input ref={emailRef} className='p-3 my-2 bg-gray-700 rounded' type='email' placeholder='Email' autoComplete='email' />
               <input ref={passwordRef} className='p-3 my-2 bg-gray-700 rounded' type='password' placeholder='Password' autoComplete='current-password' />
-              <button className='bg-red-600 py-3 my-6 rounded font-bold'>Sign In</button>
+              <button className='bg-red-600 hover:bg-red-700 py-3 my-6 rounded font-bold'>Sign In</button>
               <div className='flex justify-between items-center text-sm text-gray-500'>
                 <p><input className='mr-1' type='checkbox' />Remember Me</p>
                 <p>Need Help?</p>
               </div>
-              <p className='py-8'><span className='text-gray-500'>New to Notflicks? &nbsp;</span>
+              <p className='py-8'><span className='text-gray-400'>New to Notflicks? &nbsp;</span>
                 <Link to='/signup'>
                   Sign up now
                 </Link>
-                <span className='text-gray-500'>.</span>
+                <span className='text-gray-400'>.</span>
               </p>
             </form>
             <GuestButton/>
