@@ -4,13 +4,13 @@ import { UserAuth } from '../context/AuthContext'
 import { db } from '../firebase'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { HeroContext } from '../App'
-import Tooltip from 'react-bootstrap/Tooltip'
 
 const Movie = ({ item }) => {
     const [like, setLike] = useState(false);
     const { user } = UserAuth(); //?? maybe unneccessary for every Movie component?
     const userData = doc(db, 'users', `${user?.email}`); //?? maybe unneccessary for every Movie component?
     const { setHeroMovie } = useContext(HeroContext);
+    const [showTooltip, setShowTooltip] = useState(false);
 
     //initialize "like"
     useEffect(() => {
@@ -63,9 +63,6 @@ const Movie = ({ item }) => {
                 setLike(false);
                 deleteShow(item.id);
             }
-        } else {
-            alert('Please log in to save shows/movies');
-            // setError(true);
         }
     }, [user?.email, like, userData, item, deleteShow])
 
@@ -74,22 +71,40 @@ const Movie = ({ item }) => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
 
+    const handleTooltipShow = () => {
+            setShowTooltip(true);
+    };
+
+    const handleTooltipHide = () => {
+        setShowTooltip(false);
+    };
+
     return (
-        <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block cursor:pointer relative p-2'>
-            <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
-            <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
-                <p onClick={updateHeroMovie} className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center cursor-pointer'>
-                    {item?.title}
-                </p>
-                <p onClick={toggleSave}>
-                    {like ? (
-                        <FaHeart className='absolute top-4 left-4 text-gray-300' />
-                    ) : (
-                        <FaRegHeart className='absolute top-4 left-4 text-gray-300' />
-                    )}
-                </p>
+        <>
+            <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block cursor:pointer relative p-2'>
+                {(showTooltip && !user) && <div id="login-tooltip" className='z-10 text-white bg-red-600 absolute left-10 -translate-y-2 rounded px-2 py-1 pointer-events-none transition-opacity ease-in duration-300 opacity-100 hover:opacity-0 ' >
+                    Please Login To Save Media
+                </div> }
+                <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
+                <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 transition-opacity ease-in duration-150 opacity-0 hover:opacity-100 text-white'>
+                    <p onClick={updateHeroMovie} className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center cursor-pointer px-3'>
+                        {item?.title}
+                    </p>
+                    <div
+                        onClick={toggleSave}
+                        onMouseEnter={handleTooltipShow}
+                        onMouseLeave={handleTooltipHide}
+                    >
+
+                        {like ? (
+                            <FaHeart className='absolute top-4 left-4 text-gray-300' />
+                        ) : (
+                            <FaRegHeart className='absolute top-4 left-4 text-gray-300' />
+                        )}
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
