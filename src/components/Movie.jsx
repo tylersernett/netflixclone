@@ -4,6 +4,8 @@ import { UserAuth } from '../context/AuthContext'
 import { db } from '../firebase'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { HeroContext } from '../App'
+import LoginTooltip from './LoginTooltip'; // Import the LoginTooltip component
+
 
 const Movie = ({ item }) => {
     const [like, setLike] = useState(false);
@@ -84,18 +86,7 @@ const Movie = ({ item }) => {
     return (
         <>
             <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block relative p-2'>
-                    <div
-                        id="login-tooltip"
-                        style={{
-                            opacity: showTooltip ? 1 : 0,
-                            transition: 'opacity 0.2s ease-in',
-                        }}
-                        className="z-10 text-white bg-red-600 absolute left-10 -translate-y-2 rounded px-2 py-1 pointer-events-none"
-                    >
-                        Please Login to Save Media
-                    </div>
-                {/* )} */}
-
+            <LoginTooltip showTooltip={showTooltip} />  
                 <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
                 <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 transition-opacity ease-in duration-150 opacity-0 hover:opacity-100 text-white'>
                     <p onClick={updateHeroMovie} className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>
