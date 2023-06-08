@@ -74,7 +74,7 @@ const Main = () => {
                         >
                             Watch Later
                         </button>
-                        <div className="translate-x-28 -translate-y-14">
+                        <div className="absolute left-40 -translate-y-14 w-full">
                             <LoginTooltip showTooltip={showTooltip} />
                         </div>
                     </div>
