@@ -5,6 +5,7 @@ import { db } from '../firebase'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { HeroContext } from '../App'
 import { LoginTooltip, handleTooltipHide, handleTooltipShow } from './LoginTooltip'; // Import the LoginTooltip component
+import errorImage from './error-image.png'; // Assuming the image is located in the same directory as your .JSX file
 
 
 const Movie = ({ item }) => {
@@ -80,7 +81,11 @@ const Movie = ({ item }) => {
         <>
             <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block relative p-2'>
                 <LoginTooltip showTooltip={showTooltip} />
-                <img className='w-full h-auto' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
+                <img
+                    className='w-full h-auto'
+                    src={item?.backdrop_path ? `https://image.tmdb.org/t/p/w500/${item.backdrop_path}` : errorImage}
+                    alt={item?.title}
+                />
                 <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 transition-opacity ease-in duration-150 opacity-0 hover:opacity-100 text-white'>
                     <p onClick={updateHeroMovie} className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>
                         <span className='p-3 cursor-pointer'>{item?.title}</span>
