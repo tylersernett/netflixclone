@@ -65,6 +65,9 @@ const Main = () => {
                 <div className='absolute w-full top-[20%] p-4 md:p-8'>
                     <h1 className='text-3xl md:text-5xl font-bold'>{heroMovie?.title}</h1>
                     <div className='my-4 '>
+                    <div className="absolute left-20 -translate-y-6">
+                            <LoginTooltip showTooltip={showTooltip} />
+                        </div>
                         <button className='border  bg-gray-300 hover:bg-gray-400 text-black border-gray-300 hover:border-gray-400 py-2 pr-5 pl-3 inline-flex items-center'><FaPlay className='absolute text-black' />   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Play</button>
                         <button
                             onClick={saveShow}
@@ -74,9 +77,7 @@ const Main = () => {
                         >
                             Watch Later
                         </button>
-                        <div className="absolute left-40 -translate-y-14 w-full">
-                            <LoginTooltip showTooltip={showTooltip} />
-                        </div>
+                        
                     </div>
                     <p className='text-gray-400 text-sm'>Release: {heroMovie?.release_date}</p>
                     <p className='w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] text-gray-200'>
