@@ -22,7 +22,7 @@ export const LoginTooltip = ({ showTooltip }) => {
         // zIndex: (showTooltip && !user) ? 50 : -1,
         transition: 'opacity 0.2s ease-in',
       }}
-      className="z-20 text-white bg-red-600 absolute left-7 -top-0 rounded px-2 py-1 pointer-events-none"
+      className="z-20 whitespace-nowrap text-white bg-red-600 absolute left-7 -top-0 rounded px-2 py-1 pointer-events-none"
     >
       Please Login to Save Media
     </div>
