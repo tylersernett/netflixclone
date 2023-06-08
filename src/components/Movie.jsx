@@ -4,7 +4,7 @@ import { UserAuth } from '../context/AuthContext'
 import { db } from '../firebase'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { HeroContext } from '../App'
-import LoginTooltip from './LoginTooltip'; // Import the LoginTooltip component
+import { LoginTooltip, handleTooltipHide, handleTooltipShow } from './LoginTooltip'; // Import the LoginTooltip component
 
 
 const Movie = ({ item }) => {
@@ -73,32 +73,24 @@ const Movie = ({ item }) => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
 
-    const handleTooltipShow = () => {
-        setShowTooltip(true);
-    };
-
-    const handleTooltipHide = () => {
-        setTimeout(() => {
-            setShowTooltip(false);
-        }, 100);
-    };
+    const handleTooltipShowWrapper = () => handleTooltipShow(setShowTooltip);
+    const handleTooltipHideWrapper = () => handleTooltipHide(setShowTooltip);
 
     return (
         <>
             <div className='w-[170px] sm:w-[200px] md:w-[205px] lg:w-[270px] inline-block relative p-2'>
-            <LoginTooltip showTooltip={showTooltip} />  
-                <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
+                <LoginTooltip showTooltip={showTooltip} />
+                <img className='w-full h-auto' src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt={item?.title} />
                 <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 transition-opacity ease-in duration-150 opacity-0 hover:opacity-100 text-white'>
                     <p onClick={updateHeroMovie} className='whitespace-normal  text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>
                         <span className='p-3 cursor-pointer'>{item?.title}</span>
                     </p>
                     <div
                         onClick={toggleSave}
-                        onMouseEnter={handleTooltipShow}
-                        onMouseLeave={handleTooltipHide}
-                        className={user? 'cursor-pointer' : '' }
+                        onMouseEnter={handleTooltipShowWrapper}
+                        onMouseLeave={handleTooltipHideWrapper}
+                        className={user ? 'cursor-pointer' : ''}
                     >
-
                         {like ? (
                             <FaHeart className='absolute top-4 left-4 text-gray-300' />
                         ) : (
