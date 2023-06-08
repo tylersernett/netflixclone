@@ -30,7 +30,7 @@ const Row = ({ title, movieArrayData }) => {
             <div className='relative flex items-center group'>
                 <MdChevronLeft onClick={() => slideScroll(slider, -500)} className='bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40} />
                 <div ref={slider} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
-                    {movies.map((item, id) => (
+                    {movies?.map((item, id) => (
                         <Movie item={item} key={id} />
                     ))}
 
