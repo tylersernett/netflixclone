@@ -21,21 +21,21 @@ const Navbar = () => {
   return (
     <div className='flex items-center justify-between p-4 z-[100] w-full absolute'>
       <Link to='/'>
-        <h1 className='text-red-600 text-4xl font-bold cursor-pointer'>NOTFLICKS</h1>
+        <h1 className='text-red-600 hover:text-red-700 text-4xl font-bold cursor-pointer'>NOTFLICKS</h1>
       </Link>
-      {user?.uid ? (
+      {user?.email ? (
         <div>
           <Link to='/account'>
-            <button className='text-white pr-4'>Account</button>
+            <button className='bg-slate-800 bg-opacity-30 hover:bg-opacity-50 px-6 py-2 rounded cursor-pointer text-white'>Account</button>
           </Link>
-          <button onClick={handleLogout} className='bg-red-600 px-6 py-2 rounded cursor-pointer text-white'>Logout</button>
+          <button onClick={handleLogout} className='bg-red-600 hover:bg-red-700 px-6 py-2 rounded cursor-pointer text-white'>Logout</button>
         </div>
       ) : (
         <div>
           <Link to='/login'>
-            <button className='text-white pr-4'>Sign In</button></Link>
+            <button className='bg-slate-800 bg-opacity-30 hover:bg-opacity-50 px-6 py-2 rounded cursor-pointer text-white '>Sign In</button></Link>
           <Link to='/signup'>
-            <button className='bg-red-600 px-6 py-2 rounded cursor-pointer text-white'>Sign Up</button>
+            <button className='bg-red-600 hover:bg-red-700 px-6 py-2 rounded cursor-pointer text-white'>Sign Up</button>
           </Link>
         </div>
       )

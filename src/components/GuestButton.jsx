@@ -16,7 +16,7 @@ function GuestButton() {
 
     return (
         <>
-            <button onClick={handleGuestLogIn} className='bg-purple-700 w-full py-3 my-6 rounded font-bold' >Guest Login</button>
+            <button onClick={handleGuestLogIn} className='bg-purple-700 hover:bg-purple-800 w-full py-3 my-6 rounded font-bold' >Guest Login</button>
         </>
     );
 }
