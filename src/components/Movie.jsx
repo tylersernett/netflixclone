@@ -20,8 +20,8 @@ const Movie = ({ item }) => {
             const userData = doc(db, 'users', `${user?.email}`);
             const userSnap = await getDoc(userData); //all data -- use .savedShows later to just grab the array
             try {
-                const result = userSnap.data().savedShows.filter((item) => item.id === passedID);
-                if (result.length === 0) {
+                const result = userSnap.data()?.savedShows.filter((item) => item.id === passedID);
+                if (result === undefined || result.length === 0) {
                     setLike(false);
                 } else {
                     setLike(true);
