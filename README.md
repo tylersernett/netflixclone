@@ -1,6 +1,17 @@
 # Notflicks: a Netflix clone
 The classic junior portfolio piece...
 
+[Live Site](https://tylersernett.github.io/netflixclone/)
+
+## Built With
+React ⬩ Firebase ⬩ Tailwind ⬩ Axios
+
+## Features
+User authentication & login
+Save favorite media to user page
+Dynamic hero movie display
+
+# Dev Notes
 ## Notes: Optional Chaining
 Optional chaining: ?. -- used to return undefined instead of throwing error when response is undefined or null.
 ```JSX
