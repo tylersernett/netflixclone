@@ -7,9 +7,9 @@ The classic junior portfolio piece...
 React ⬩ Firebase ⬩ Tailwind ⬩ Axios
 
 ## Features
-User authentication & login
-Save favorite media to user page
-Dynamic hero movie display
+* User authentication & login
+* Save favorite media to user page
+* Dynamic hero movie display
 
 # Dev Notes
 ## Notes: Optional Chaining
